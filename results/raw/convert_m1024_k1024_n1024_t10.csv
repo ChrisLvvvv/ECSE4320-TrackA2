@@ -1,0 +1,21 @@
+# m=1024,k=1024,n=1024,threads=10,iters=5,seed=1
+# densities=0.001 0.002 0.005 0.01 0.02 0.05 0.10 0.20 0.50
+# OMP_DYNAMIC=false, OMP_PROC_BIND=close, OMP_PLACES=cores
+kernel=convert_csr,m=1024,k=1024,density=0.001000,nnz=1034,iters=5,time_s=0.000950,p95_s=0.001979
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.001000,nnz=1037,iters=5,threads=10,time_s=0.000060,gflops=35.327,sec_per_nnz=5.797203601e-08
+kernel=convert_csr,m=1024,k=1024,density=0.002000,nnz=2056,iters=5,time_s=0.000849,p95_s=0.001201
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.002000,nnz=2047,iters=5,threads=10,time_s=0.000114,gflops=36.718,sec_per_nnz=5.577576894e-08
+kernel=convert_csr,m=1024,k=1024,density=0.005000,nnz=5245,iters=5,time_s=0.000886,p95_s=0.001345
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.005000,nnz=5161,iters=5,threads=10,time_s=0.000206,gflops=51.296,sec_per_nnz=3.992482078e-08
+kernel=convert_csr,m=1024,k=1024,density=0.010000,nnz=10348,iters=5,time_s=0.000867,p95_s=0.001171
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.010000,nnz=10463,iters=5,threads=10,time_s=0.000491,gflops=43.619,sec_per_nnz=4.695211696e-08
+kernel=convert_csr,m=1024,k=1024,density=0.020000,nnz=20815,iters=5,time_s=0.000987,p95_s=0.001648
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.020000,nnz=20971,iters=5,threads=10,time_s=0.000804,gflops=53.389,sec_per_nnz=3.835983025e-08
+kernel=convert_csr,m=1024,k=1024,density=0.050000,nnz=52101,iters=5,time_s=0.001243,p95_s=0.001757
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.050000,nnz=52428,iters=5,threads=10,time_s=0.001504,gflops=71.402,sec_per_nnz=2.868270773e-08
+kernel=convert_csr,m=1024,k=1024,density=0.100000,nnz=104349,iters=5,time_s=0.001750,p95_s=0.002264
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.100000,nnz=104706,iters=5,threads=10,time_s=0.002749,gflops=77.998,sec_per_nnz=2.625697667e-08
+kernel=convert_csr,m=1024,k=1024,density=0.200000,nnz=208978,iters=5,time_s=0.002588,p95_s=0.003355
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.200000,nnz=209670,iters=5,threads=10,time_s=0.005329,gflops=80.583,sec_per_nnz=2.541490915e-08
+kernel=convert_csr,m=1024,k=1024,density=0.500000,nnz=523455,iters=5,time_s=0.004718,p95_s=0.006034
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.500000,nnz=524288,iters=5,threads=10,time_s=0.015346,gflops=69.971,sec_per_nnz=2.926924515e-08

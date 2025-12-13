@@ -1,19 +1,7 @@
-# build outputs
+# build artifacts
 build/
-*.o
-*.out
-*.a
-*.so
 
-# results
-results/raw/*
-results/tables/*
-results/figures/*
-!results/raw/.keep
-!results/tables/.keep
-!results/figures/.keep
-
-# python
+# python venv / cache
 .venv/
 __pycache__/
 *.pyc

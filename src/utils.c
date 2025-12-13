@@ -3,39 +3,59 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <string.h>
 
-/* timing */
 double now_sec(void)
 {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
-    return ts.tv_sec + ts.tv_nsec * 1e-9;
+    return (double)ts.tv_sec + (double)ts.tv_nsec * 1e-9;
 }
 
-/* dense matrix helpers */
+/* dense */
 double *alloc_dense(size_t rows, size_t cols)
 {
-    return (double *)aligned_alloc(64, rows * cols * sizeof(double));
+    size_t bytes = rows * cols * sizeof(double);
+    void *p = NULL;
+    if (posix_memalign(&p, 64, bytes) != 0) return NULL;
+    return (double *)p;
 }
 
-void random_dense(double *A, size_t rows, size_t cols, unsigned int seed)
+void free_dense(double *p)
+{
+    free(p);
+}
+
+void zero_dense(double *A, size_t n)
+{
+    memset(A, 0, n * sizeof(double));
+}
+
+void random_dense(double *A, size_t n, unsigned int seed)
 {
     srand(seed);
-    for (size_t i = 0; i < rows * cols; ++i) {
-        A[i] = (double)rand() / RAND_MAX;
+    for (size_t i = 0; i < n; ++i) {
+        A[i] = (double)rand() / (double)RAND_MAX;
     }
 }
 
-/* CSR helpers */
+/* CSR */
 csr_matrix_t *alloc_csr(size_t rows, size_t cols, size_t nnz)
 {
-    csr_matrix_t *A = malloc(sizeof(csr_matrix_t));
+    csr_matrix_t *A = (csr_matrix_t *)malloc(sizeof(csr_matrix_t));
+    if (!A) return NULL;
     A->rows = rows;
     A->cols = cols;
-    A->nnz  = nnz;
-    A->row_ptr = malloc((rows + 1) * sizeof(size_t));
-    A->col_idx = malloc(nnz * sizeof(size_t));
-    A->values  = malloc(nnz * sizeof(double));
+    A->nnz = nnz;
+
+    A->row_ptr = (size_t *)malloc((rows + 1) * sizeof(size_t));
+    A->col_idx = (int *)malloc(nnz * sizeof(int));
+    A->values  = (double *)malloc(nnz * sizeof(double));
+
+    if (!A->row_ptr || !A->col_idx || !A->values) {
+        free_csr(A);
+        return NULL;
+    }
     return A;
 }
 
@@ -48,25 +68,30 @@ void free_csr(csr_matrix_t *A)
     free(A);
 }
 
+/* uniform random sparsity; allows duplicates within a row (fine for now) */
 csr_matrix_t *random_csr(size_t rows, size_t cols, double density, unsigned int seed)
 {
+    if (density < 0.0) density = 0.0;
+    if (density > 1.0) density = 1.0;
+
     srand(seed);
 
-    size_t max_nnz = (size_t)(rows * cols * density);
-    if (max_nnz == 0) max_nnz = 1;
+    size_t cap = (size_t)((double)rows * (double)cols * density);
+    if (cap < 1) cap = 1;
 
-    csr_matrix_t *A = alloc_csr(rows, cols, max_nnz);
+    csr_matrix_t *A = alloc_csr(rows, cols, cap);
+    if (!A) return NULL;
 
     size_t nnz = 0;
     A->row_ptr[0] = 0;
 
     for (size_t i = 0; i < rows; ++i) {
         for (size_t j = 0; j < cols; ++j) {
-            double r = (double)rand() / RAND_MAX;
+            double r = (double)rand() / (double)RAND_MAX;
             if (r < density) {
-                if (nnz < max_nnz) {
-                    A->col_idx[nnz] = j;
-                    A->values[nnz]  = (double)rand() / RAND_MAX;
+                if (nnz < cap) {
+                    A->col_idx[nnz] = (int)j;
+                    A->values[nnz]  = (double)rand() / (double)RAND_MAX;
                     nnz++;
                 }
             }
@@ -79,15 +104,16 @@ csr_matrix_t *random_csr(size_t rows, size_t cols, double density, unsigned int 
 }
 
 /* validation */
-double max_relative_error(const double *A, const double *B, size_t n)
+double max_relative_error(const double *ref, const double *x, size_t n)
 {
     double max_err = 0.0;
     double max_ref = 0.0;
 
     for (size_t i = 0; i < n; ++i) {
-        double diff = fabs(A[i] - B[i]);
+        double diff = fabs(ref[i] - x[i]);
         if (diff > max_err) max_err = diff;
-        if (fabs(B[i]) > max_ref) max_ref = fabs(B[i]);
+        double ar = fabs(ref[i]);
+        if (ar > max_ref) max_ref = ar;
     }
 
     if (max_ref == 0.0) return max_err;

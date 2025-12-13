@@ -1,0 +1,8 @@
+# OMP_DYNAMIC=false, OMP_PROC_BIND=close, OMP_PLACES=cores
+# threads_target=10
+variant=novec,kernel=dense_gemm,m=1024,k=1024,n=1024,iters=5,threads=1,block=128,time_s=0.225764,gflops=9.512
+variant=novec,kernel=dense_gemm,m=1024,k=1024,n=1024,iters=5,threads=10,block=128,time_s=0.045208,gflops=47.502
+variant=vec,kernel=dense_gemm,m=1024,k=1024,n=1024,iters=5,threads=10,block=128,time_s=0.022483,gflops=95.517
+variant=novec,kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.050000,nnz=52428,iters=5,threads=1,time_s=0.013989,gflops=7.675,sec_per_nnz=2.668277256e-07
+variant=novec,kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.050000,nnz=52428,iters=5,threads=10,time_s=0.002160,gflops=49.704,sec_per_nnz=4.120408940e-08
+variant=vec,kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.050000,nnz=52428,iters=5,threads=10,time_s=0.001459,gflops=73.618,sec_per_nnz=2.781944762e-08

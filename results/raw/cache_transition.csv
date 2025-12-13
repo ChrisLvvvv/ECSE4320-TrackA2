@@ -1,0 +1,19 @@
+# sizes=256 512 768 1024 1536 2048 3072 4096
+# density=0.05, iters=5, threads=10, block=128, seed=1
+# OMP_DYNAMIC=false, OMP_PROC_BIND=close, OMP_PLACES=cores
+kernel=dense_gemm,m=256,k=256,n=256,iters=5,threads=10,block=128,time_s=0.000712,gflops=47.106
+kernel=spmm_csr,m=256,k=256,n=256,density=0.050000,nnz=3276,iters=5,threads=10,time_s=0.000022,gflops=76.450,sec_per_nnz=6.697191388e-09
+kernel=dense_gemm,m=512,k=512,n=512,iters=5,threads=10,block=128,time_s=0.003795,gflops=70.734
+kernel=spmm_csr,m=512,k=512,n=512,density=0.050000,nnz=13107,iters=5,threads=10,time_s=0.000203,gflops=66.230,sec_per_nnz=1.546120398e-08
+kernel=dense_gemm,m=768,k=768,n=768,iters=5,threads=10,block=128,time_s=0.010572,gflops=85.699
+kernel=spmm_csr,m=768,k=768,n=768,density=0.050000,nnz=29460,iters=5,threads=10,time_s=0.000768,gflops=58.936,sec_per_nnz=2.606228784e-08
+kernel=dense_gemm,m=1024,k=1024,n=1024,iters=5,threads=10,block=128,time_s=0.024014,gflops=89.427
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.050000,nnz=52428,iters=5,threads=10,time_s=0.001732,gflops=61.987,sec_per_nnz=3.303892957e-08
+kernel=dense_gemm,m=1536,k=1536,n=1536,iters=5,threads=10,block=128,time_s=0.072510,gflops=99.955
+kernel=spmm_csr,m=1536,k=1536,n=1536,density=0.050000,nnz=117964,iters=5,threads=10,time_s=0.008302,gflops=43.649,sec_per_nnz=7.037997186e-08
+kernel=dense_gemm,m=2048,k=2048,n=2048,iters=5,threads=10,block=128,time_s=0.249421,gflops=68.879
+kernel=spmm_csr,m=2048,k=2048,n=2048,density=0.050000,nnz=209715,iters=5,threads=10,time_s=0.048280,gflops=17.792,sec_per_nnz=2.302180817e-07
+kernel=dense_gemm,m=3072,k=3072,n=3072,iters=5,threads=10,block=128,time_s=0.556331,gflops=104.222
+kernel=spmm_csr,m=3072,k=3072,n=3072,density=0.050000,nnz=471859,iters=5,threads=10,time_s=0.256497,gflops=11.303,sec_per_nnz=5.435887670e-07
+kernel=dense_gemm,m=4096,k=4096,n=4096,iters=5,threads=10,block=128,time_s=2.130774,gflops=64.502
+kernel=spmm_csr,m=4096,k=4096,n=4096,density=0.050000,nnz=838860,iters=5,threads=10,time_s=0.697253,gflops=9.856,sec_per_nnz=8.311906385e-07

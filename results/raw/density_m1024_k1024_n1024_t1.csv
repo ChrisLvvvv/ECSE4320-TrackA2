@@ -1,0 +1,9 @@
+kernel=dense_gemm,m=1024,k=1024,n=1024,iters=5,threads=1,block=128,time_s=0.123012,gflops=17.458
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.001000,nnz=1037,iters=5,threads=1,time_s=0.000294,gflops=7.225,sec_per_nnz=2.834715525e-07
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.005000,nnz=5161,iters=5,threads=1,time_s=0.001441,gflops=7.337,sec_per_nnz=2.791395075e-07
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.010000,nnz=10463,iters=5,threads=1,time_s=0.002546,gflops=8.415,sec_per_nnz=2.433742712e-07
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.020000,nnz=20971,iters=5,threads=1,time_s=0.003728,gflops=11.522,sec_per_nnz=1.777500358e-07
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.050000,nnz=52428,iters=5,threads=1,time_s=0.008616,gflops=12.462,sec_per_nnz=1.643380445e-07
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.100000,nnz=104706,iters=5,threads=1,time_s=0.016290,gflops=13.163,sec_per_nnz=1.555824595e-07
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.200000,nnz=209670,iters=5,threads=1,time_s=0.033866,gflops=12.679,sec_per_nnz=1.615224066e-07
+kernel=spmm_csr,m=1024,k=1024,n=1024,density=0.500000,nnz=524288,iters=5,threads=1,time_s=0.098659,gflops=10.883,sec_per_nnz=1.881770763e-07
