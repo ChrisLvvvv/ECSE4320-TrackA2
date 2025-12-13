@@ -1,0 +1,22 @@
+# build outputs
+build/
+*.o
+*.out
+*.a
+*.so
+
+# results
+results/raw/*
+results/tables/*
+results/figures/*
+!results/raw/.keep
+!results/tables/.keep
+!results/figures/.keep
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# editor
+.vscode/
