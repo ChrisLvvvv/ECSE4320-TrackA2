@@ -1,3 +1,10 @@
+> **Maintenance moved (2026-11-05).**
+> The maintained course project is now in [ECSE4320-TrackA2](https://github.com/ChrisLvvvv/ECSE4320-Projects/tree/main/ECSE4320-TrackA2).
+> Its original project files, ignore rules, and executable modes were verified in collection commit `f460a7d912533c1d14719fa32afeac71684c10be`.
+> This repository retains its original Git history and the original README below.
+
+---
+
 # ECSE 4320 – Project A2  
 ## Dense vs Sparse Matrix Multiplication  
 SIMD, Multithreading, and Roofline Analysis
